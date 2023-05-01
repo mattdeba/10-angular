@@ -12,6 +12,6 @@ import {ProductComponent} from "./component";
     BrowserModule
   ],
   providers: [],
-  bootstrap: [AppComponent, ProductComponent]
+  bootstrap: [ProductComponent]
 })
 export class AppModule { }

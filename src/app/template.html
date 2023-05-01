@@ -1,3 +1,17 @@
-<div [ngClass]="getClasses()" >
-  Hello, World.
+<!-- liaison à sens unique-->
+<div [ngClass]="'text-white p-2 '+getClasses()" >
+  La directive est définie par la propriété getClasses du composant
+  qui renvoie la liste des classes à appliquer.
+</div>
+
+<!-- liaison de propriété standard-->
+<div class="form-group m-2">
+  <label>Nom:</label>
+  <input class="form-control" [value]="model.getProduct(1)?.name ?? 'nom par défaut'">
+</div>
+
+<!-- liaison d'interpolation de chaine -->
+<div [ngClass]="'text-white p-2 '+getClasses()"
+     [textContent]="'Name: ' + (model.getProduct(1)?.name ??
+     'None')">
 </div>
