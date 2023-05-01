@@ -1,33 +1,8 @@
-<!-- liaison à sens unique-->
-<div [ngClass]="'text-white p-2 '+getClasses()" >
-  La directive est définie par la propriété getClasses du composant
-  qui renvoie la liste des classes à appliquer.
+<div class="text-white">
+  <div [class]="getClasses(1)">
+    The first product is {{model.getProduct(1)?.name}}.
+  </div>
+  <div [class]="getClasses(2)">
+    The second product is {{model.getProduct(2)?.name}}
+  </div>
 </div>
-
-<!-- liaison de propriété standard-->
-<div class="form-group m-2">
-  <label>Nom:</label>
-  <input class="form-control" [value]="model.getProduct(1)?.name ?? 'nom par défaut'">
-</div>
-
-<!-- liaison d'interpolation de chaine -->
-<div [ngClass]="'text-white p-2 '+getClasses()"
-     [textContent]="'Nom: ' + (model.getProduct(1)?.name ??
-     'None')">
-</div>
-
-<!--avec définition de fragments d'expression dans le contenu de l'élément.-->
-<div [ngClass]="'text-white p-2 '+getClasses()">
-  Nom: {{model.getProduct(1)?.name ?? 'None'}}
-</div>
-
-<table class="table mt-2">
-  <tr>
-    <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
-  </tr>
-  <tr>
-    <td [attr.colspan]="model.getProducts().length">
-      {{model.getProduct(1)?.name ?? 'None'}}
-    </td>
-  </tr>
-</table>
