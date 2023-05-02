@@ -30,6 +30,12 @@ export class Model {
       this.products.splice(index, 1);
     }
   }
+  swapProduct() {
+    let p = this.products.shift();
+    if (p != null) {
+      this.products.push(new Product(p.id, p.name, p.category, p.price));
+    }
+  }
   private generateID(): number {
     let candidate = 100;
     while (this.getProduct(candidate) != null) {
