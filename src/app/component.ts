@@ -31,4 +31,9 @@ export class ProductComponent {
   getKey(index: number, product: Product) {
     return product.id;
   }
+  counter: number = 1;
+
+  get nextProduct(): Product | undefined {
+    return this.model.getProducts().shift();
+  }
 }
