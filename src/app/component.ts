@@ -14,4 +14,7 @@ export class ProductComponent {
     return this.model.getProducts();
   }
   selectedProduct: string | undefined;
+  getSelected(product: Product): boolean {
+    return product.name == this.selectedProduct;
+  }
 }
