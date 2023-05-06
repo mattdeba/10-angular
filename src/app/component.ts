@@ -7,19 +7,18 @@ import { Product } from "./product.model";
 })
 export class ProductComponent {
   model: Model = new Model();
+  newProduct: Product = new Product();
+
   getProduct(key: number): Product | undefined {
     return this.model.getProduct(key);
   }
   getProducts(): Product[] {
     return this.model.getProducts();
   }
-  selectedProduct: string | undefined;
-  getSelected(product: Product): boolean {
-    return product.name == this.selectedProduct;
+  get jsonProduct() {
+    return JSON.stringify(this.newProduct);
   }
-  handleInputEvent(ev: Event) {
-    if (ev.target instanceof HTMLInputElement) {
-      this.selectedProduct = ev.target.value
-    }
+  addProduct(p: Product) {
+    console.log("New Product: " + this.jsonProduct);
   }
 }
