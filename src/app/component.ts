@@ -1,13 +1,14 @@
 import { Component } from "@angular/core";
 import { Model } from "./repository.model";
 import { Product } from "./product.model";
-import { NgModel, ValidationErrors } from "@angular/forms";
+import { NgModel, ValidationErrors, NgForm } from "@angular/forms";
 @Component({
   selector: "app",
   templateUrl: "template.html"
 })
 export class ProductComponent {
   model: Model = new Model();
+
   getProduct(key: number): Product | undefined {
     return this.model.getProduct(key);
   }
@@ -45,4 +46,15 @@ export class ProductComponent {
     let thing: string = state.path?.[0] ?? thingName;
     return this.getMessages(state.errors, thing)
   }
+  formSubmitted: boolean = false;
+  submitForm(form: NgForm) {
+    this.formSubmitted = true;
+    if (form.valid) {
+      this.addProduct(this.newProduct);
+      this.newProduct = new Product();
+      form.resetForm();
+      this.formSubmitted = false;
+    }
+  }
+
 }
