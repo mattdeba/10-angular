@@ -1,23 +1,43 @@
 import { Component } from "@angular/core";
-import { Model } from "./repository.model";
-import { Product } from "./product.model";
+import * as XLSX from "xlsx";
 @Component({
   selector: "app",
   templateUrl: "template.html"
 })
 export class ProductComponent {
-  model: Model = new Model();
-  getProduct(key: number): Product | undefined {
-    return this.model.getProduct(key);
+
+  arrayBuffer: any;
+  file: File | null = null;
+  excelData: any[][] = [];
+  dataLoaded = false;
+
+  onFileChange(event: any) {
+    this.file = event.target.files[0];
   }
-  getProducts(): Product[] {
-    return this.model.getProducts();
+
+  uploadFile() {
+    if (this.file) {
+      const reader: FileReader = new FileReader();
+      reader.onload = (e: any) => {
+        const binaryString: string = e.target.result;
+        const workbook: XLSX.WorkBook = XLSX.read(binaryString, {
+          type: 'binary',
+        });
+        const sheetName: string = workbook.SheetNames[0];
+        const worksheet: XLSX.WorkSheet = workbook.Sheets[sheetName];
+        this.excelData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+        this.dataLoaded = true;
+        if (!this.verifyData()) {
+          console.log("Invalid data");
+          return;
+        }
+        console.log(this.excelData);
+      };
+      reader.readAsArrayBuffer(this.file);
+    }
   }
-  newProduct: Product = new Product();
-  addProduct(p: Product) {
-    this.model.saveProduct(p);
-  }
-  submitForm() {
-    this.addProduct(this.newProduct);
+
+  verifyData() {
+    return true;
   }
 }
