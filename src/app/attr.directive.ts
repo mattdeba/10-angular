@@ -4,6 +4,6 @@ import { Directive, ElementRef } from "@angular/core";
 })
 export class PaAttrDirective {
   constructor(element: ElementRef) {
-    element.nativeElement.classList.add("table-success", "fw-bold");
+    element.nativeElement.classList.add("bg-success", "fw-bold");
   }
 }
